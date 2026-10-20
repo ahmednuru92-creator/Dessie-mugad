@@ -9,22 +9,24 @@
   "start_url": "https://dessie-mugad.vercel.app/",
   "theme_color": "#22db0f",
   "id": "Com.dessiemart.app",
-  "description": "የደሴ ከተማ ዲጂታል የኅብረት መድረክ ሽያጭ ኪራይ ጨረታ እና ማስታወቂያ ማላመጃ",
+  "description": "የደሴ ከተማ ዲጂታል የኅብረት መድረክ ሽያጭ ኪራይ ጨረታ እና ማስታወቂያ ማሳለጫ",
   "lang": "am",
   "categories": [
     "business",
     "finance",
-    "productivity"
+    "productivity",
+    "shopping",
+    "lifestyle"
   ],
   "icons": [
     {
-      "src": "/a_premium_modern_mobile_app_icon_for_dessie_mart.png",
+      "src": "/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/a_premium_modern_mobile_app_icon_for_dessie_mart.png",
+      "src": "/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
