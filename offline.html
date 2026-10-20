@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="am" dir="ltr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>ደሴ ማርት - የበይነመረብ ግንኙነት ተቋርጧል (Offline)</title>
+  <meta name="theme-color" content="#1254d6"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#1254d6',
+            brandOrange: '#f97316',
+            brandLime: '#16a34a',
+            darkFrame: '#0b0f19',
+            surfaceBg: '#f9f9ff',
+          },
+          fontFamily: {
+            sans: ['"Noto Sans Ethiopic"', '"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Noto Sans Ethiopic', 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .animate-pulse-ring {
+      animation: pulse-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#f0f3fa] text-slate-900 flex justify-center min-h-screen">
+
+  <!-- Mobile Viewport Frame (Max-w-md) -->
+  <div class="w-full max-w-md bg-surfaceBg min-h-screen flex flex-col justify-between relative shadow-2xl border-x border-slate-200/80">
+
+    <!-- 🔝 Header (የራስጌ አሞሌ) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 py-3 border-b border-slate-100 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2.5">
+        <div class="w-10 h-10 rounded-2xl bg-brandBlue text-white flex items-center justify-center shadow-md shadow-brandBlue/25">
+          <span class="material-symbols-outlined text-2xl">storefront</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h1 class="text-base font-extrabold text-black tracking-tight leading-none">ደሴ ማርት</h1>
+            <span class="material-symbols-outlined text-brandBlue text-sm">verified</span>
+          </div>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">ሙጋድ ገበያ • ደሴ፣ ኢትዮጵያ</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span>ከመስመር ውጭ</span>
+      </div>
+    </header>
+
+    <!-- 📶 Main Offline Body (ዋና የከመስመር ውጭ ይዘት) -->
+    <main class="flex-1 flex flex-col items-center justify-center px-5 py-6 text-center">
+      
+      <!-- ምልክት እና አኒሜሽን (Signal Animated Illustration) -->
+      <div class="relative mb-6">
+        <div class="w-28 h-28 rounded-full bg-brandBlue/10 flex items-center justify-center animate-pulse-ring absolute inset-0 -m-2"></div>
+        <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-brandBlue/15 to-blue-50 border-2 border-brandBlue/20 flex items-center justify-center text-brandBlue relative shadow-md shadow-brandBlue/15">
+          <span class="material-symbols-outlined text-4xl text-brandBlue">wifi_off</span>
+        </div>
+        <div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg border-2 border-white">
+          <span class="material-symbols-outlined text-sm">cloud_off</span>
+        </div>
+      </div>
+
+      <!-- ዋና ርዕስ እና መግለጫ -->
+      <h2 class="text-lg font-black text-black mb-2">
+        የበይነመረብ ግንኙነት ተቋርጧል
+      </h2>
+      <p class="text-xs text-slate-600 mb-6 leading-relaxed max-w-xs px-2">
+        ስልክዎ በአሁኑ ወቅት ከኢንተርኔት (ዋይፋይ ወይም የሞባይል ዳታ) ጋር አልተገናኘም። እባክዎ ግንኙነትዎን ፈትሸው በድጋሚ ይሞክሩ።
+      </p>
+
+      <!-- ⚡ ፈጣን እርምጃዎች (Action Buttons) -->
+      <div class="w-full space-y-2.5 mb-6">
+        <button onclick="window.location.reload()" class="w-full py-3.5 px-4 bg-brandBlue hover:bg-blue-700 active:scale-[0.98] transition-all rounded-2xl text-white font-extrabold text-xs shadow-md shadow-brandBlue/25 flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-base">refresh</span>
+          <span>ድጋሚ ይሞክሩ (Try Again)</span>
+        </button>
+
+        <a href="/" class="w-full py-3 px-4 bg-white hover:bg-slate-50 border border-slate-200 active:scale-[0.98] transition-all rounded-2xl text-black font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
+          <span class="material-symbols-outlined text-base text-slate-500">home</span>
+          <span>ወደተቀመጠው መነሻ ገጽ ተመለስ</span>
+        </a>
+      </div>
+
+      <!-- 💡 የሚመከሩ መፍትሄዎች (Offline Tips Card) -->
+      <div class="w-full bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm text-left">
+        <div class="flex items-center gap-2 mb-2.5">
+          <span class="material-symbols-outlined text-brandBlue text-base">tips_and_updates</span>
+          <h3 class="text-xs font-extrabold text-black uppercase tracking-wider">የሚመከሩ መፍትሄዎች፦</h3>
+        </div>
+        <ul class="space-y-2 text-[11px] text-slate-600">
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brandBlue mt-1.5 flex-shrink-0"></span>
+            <span>የስልክዎን ዋይፋይ (Wi-Fi) ወይም የሞባይል ዳታ ክፍት መሆኑን ያረጋግጡ።</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brandBlue mt-1.5 flex-shrink-0"></span>
+            <span>ስልክዎን ለ 5 ሰከንድ ወደ <strong>Airplane Mode</strong> ቀይረው መልሰው ይክፈቱት።</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brandBlue mt-1.5 flex-shrink-0"></span>
+            <span>አስቀድመው የተመለከቷቸው ገጾች በስልክዎ ካሼ (Cache) ውስጥ ተቀምጠዋል።</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 📞 የቀጥታ የስልክ ድጋፍ (Click-to-Call) -->
+      <div class="mt-5 flex items-center justify-center gap-1.5 text-xs text-slate-600">
+        <span class="material-symbols-outlined text-sm text-brandOrange">phone_in_talk</span>
+        <span>የደንበኞች ድጋፍ መስመር፦</span>
+        <a href="tel:0920044626" class="font-black text-black hover:text-brandBlue transition-colors">0920 04 46 26</a>
+      </div>
+
+    </main>
+
+    <!-- 📍 Footer -->
+    <footer class="py-3 text-center text-[10px] text-slate-400 border-t border-slate-200/60 bg-white">
+      <p>ደሴ ማርት (ሙጋድ ገበያ) • በደሴ ከተማ እና በደቡብ ወሎ 🇪🇹</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ኔትወርክ ሲመለስ ገጹ በራስ-ሰር ሪፍሬሽ እንዲሆን ማድረግ
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
+```
+
+---
+
+## 🔍 3. በ `offline.html` ውስጥ የተካተቱ ቁልፍ ህጎች፦
+1. **Auto-Reload on Reconnect፦** ተጠቃሚው ዳታውን ወይም ዋይፋዩን ሲያበራ ገጹ በሰከንድ ውስጥ በራሱ ሪፍሬሽ ያደርጋል።
+2. **ይፋዊ የመገናኛ ቁጥር፦** ብቸኛውና ይፋዊው ስልክ ቁጥር **`0920 04 46 26`** ብቻ ሆኖ ተቀምጧል (አጭር ቁጥር 127 ሙሉ በሙሉ ተወግዷል)።
+3. **PWA Offline Fallback፦** በ `sw.js` ሰርቪስ ወርከር ውስጥ ከ `OFFLINE_URL = '/offline.html'` ጋር 100% ተናቦ ይሰራል!
