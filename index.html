@@ -65,16 +65,16 @@
     <div class="px-4 pt-3 pb-2">
       <div class="flex items-center gap-2 bg-white rounded-2xl px-3.5 py-2.5 border border-slate-200 shadow-sm focus-within:border-brandBlue transition-all">
         <span class="material-symbols-outlined text-slate-400 text-xl">search</span>
-        <input type="text" id="searchInput" oninput="filterListings()" placeholder="መኪና፣ ቤት፣ ጀነሬተር ወይም ዕቃ ይፈልጉ..." class="w-full bg-transparent text-xs font-medium text-slate-800 placeholder-slate-400 outline-none"/>
-        <button onclick="clearSearch()" class="text-slate-400 hover:text-brandBlue">
+        <input type="text" id="searchInput" placeholder="መኪና፣ ቤት፣ ጀነሬተር ወይም ዕቃ ይፈልጉ..." class="w-full bg-transparent text-xs font-medium text-slate-800 placeholder-slate-400 outline-none"/>
+        <button id="clearSearchBtn" class="text-slate-400 hover:text-brandBlue">
           <span class="material-symbols-outlined text-xl">close</span>
         </button>
       </div>
     </div>
 
-    <!-- 📂 Main Categories (Filter Actions) -->
+    <!-- 📂 Main Categories -->
     <div class="px-4 py-2 grid grid-cols-3 gap-2.5">
-      <button onclick="filterByCategory('ሽያጭ')" class="bg-brandOrange text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandOrange/25 active:scale-95 transition-all">
+      <button id="catSales" class="bg-brandOrange text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandOrange/25 active:scale-95 transition-all">
         <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
           <span class="material-symbols-outlined text-2xl">shopping_bag</span>
         </div>
@@ -82,7 +82,7 @@
         <span class="text-[10px] text-white/80 font-medium">Sales</span>
       </button>
 
-      <button onclick="filterByCategory('ኪራይ')" class="bg-brandBlue text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandBlue/25 active:scale-95 transition-all">
+      <button id="catRentals" class="bg-brandBlue text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandBlue/25 active:scale-95 transition-all">
         <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
           <span class="material-symbols-outlined text-2xl">key</span>
         </div>
@@ -90,7 +90,7 @@
         <span class="text-[10px] text-white/80 font-medium">Rentals</span>
       </button>
 
-      <button onclick="filterByCategory('ጨረታ')" class="bg-brandLime text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandLime/25 active:scale-95 transition-all">
+      <button id="catTenders" class="bg-brandLime text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandLime/25 active:scale-95 transition-all">
         <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
           <span class="material-symbols-outlined text-2xl">gavel</span>
         </div>
@@ -106,7 +106,7 @@
           <span>የተመረጡ ማስታወቂያዎች</span>
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </h2>
-        <button onclick="resetFilter()" class="text-xs font-bold text-brandBlue hover:underline">ሁሉንም እይ</button>
+        <button id="resetFilterBtn" class="text-xs font-bold text-brandBlue hover:underline">ሁሉንም እይ</button>
       </div>
 
       <!-- Item 1 -->
@@ -199,21 +199,21 @@
         <span class="text-[10px] font-bold">መነሻ</span>
       </a>
 
-      <button onclick="alert('የደሴ ማርት ፍለጋ ስርዓት ዝግጁ ነው!')" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navSearch" class="flex flex-col items-center hover:text-white gap-0.5">
         <span class="material-symbols-outlined text-xl">search</span>
         <span class="text-[10px] font-medium">ፍለጋ</span>
       </button>
 
-      <button onclick="openPostModal()" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform">
+      <button id="navAdd" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform">
         <span class="material-symbols-outlined text-2xl font-black">add</span>
       </button>
 
-      <button onclick="alert('የቴሌግራም ቦት (@DessieMarket) ከክፍያ ጋር ተያይዟል!')" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navChat" class="flex flex-col items-center hover:text-white gap-0.5">
         <span class="material-symbols-outlined text-xl">chat</span>
         <span class="text-[10px] font-medium">መልእክቶች</span>
       </button>
 
-      <button onclick="alert('ደሴ ማርት (ሙጋድ ገበያ) - ስሪት 1.0.0')" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navProfile" class="flex flex-col items-center hover:text-white gap-0.5">
         <span class="material-symbols-outlined text-xl">person</span>
         <span class="text-[10px] font-medium">መለያ</span>
       </button>
@@ -221,54 +221,102 @@
 
   </div>
 
-  <!-- JavaScript Actions & Service Worker -->
+  <!-- Robust Interactive JavaScript Logic -->
   <script>
-    function filterListings() {
-      const input = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.listing-card');
-      cards.forEach(card => {
-        const title = card.getAttribute('data-title').toLowerCase();
-        card.style.display = title.includes(input) ? 'flex' : 'none';
-      });
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+      const searchInput = document.getElementById("searchInput");
+      const clearSearchBtn = document.getElementById("clearSearchBtn");
+      const resetFilterBtn = document.getElementById("resetFilterBtn");
+      const catSales = document.getElementById("catSales");
+      const catRentals = document.getElementById("catRentals");
+      const catTenders = document.getElementById("catTenders");
+      const navSearch = document.getElementById("navSearch");
+      const navAdd = document.getElementById("navAdd");
+      const navChat = document.getElementById("navChat");
+      const navProfile = document.getElementById("navProfile");
+      const cards = document.querySelectorAll(".listing-card");
 
-    function clearSearch() {
-      document.getElementById('searchInput').value = '';
-      filterListings();
-    }
-
-    function filterByCategory(category) {
-      const cards = document.querySelectorAll('.listing-card');
-      cards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        card.style.display = (cat === category) ? 'flex' : 'none';
-      });
-    }
-
-    function resetFilter() {
-      const cards = document.querySelectorAll('.listing-card');
-      cards.forEach(card => card.style.display = 'flex');
-    }
-
-    function openPostModal() {
-      const title = prompt("የሚለጥፉትን ዕቃ ወይም ንብረት ስም ያስገቡ:");
-      if (title) {
-        const price = prompt("ዋጋ በብር ያስገቡ:");
-        if (price) {
-          alert("እንኳን ደስ አሎት! '" + title + "' ማስታወቂያዎ ተመዝግቧል። ወደ ቴሌግራም ቻናል (@DessieMarket) ይተላለፋል!");
-        }
-      }
-    }
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then((reg) => {
-          console.log('✅ ደሴ ማርት Service Worker ዝግጁ ነው:', reg.scope);
-        }).catch((err) => {
-          console.error('Service Worker ምዝገባ ስህተት:', err);
+      // 1. Live Search
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          const val = e.target.value.toLowerCase();
+          cards.forEach(card => {
+            const title = card.getAttribute("data-title").toLowerCase();
+            card.style.display = title.includes(val) ? "flex" : "none";
+          });
         });
-      });
-    }
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+          if (searchInput) searchInput.value = "";
+          cards.forEach(card => card.style.display = "flex");
+        });
+      }
+
+      // 2. Category Filters
+      function filterCat(category) {
+        cards.forEach(card => {
+          const cat = card.getAttribute("data-category");
+          card.style.display = (cat === category) ? "flex" : "none";
+        });
+      }
+
+      if (catSales) catSales.addEventListener("click", () => filterCat("ሽያጭ"));
+      if (catRentals) catRentals.addEventListener("click", () => filterCat("ኪራይ"));
+      if (catTenders) catTenders.addEventListener("click", () => filterCat("ጨረታ"));
+
+      if (resetFilterBtn) {
+        resetFilterBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          cards.forEach(card => card.style.display = "flex");
+          if (searchInput) searchInput.value = "";
+        });
+      }
+
+      // 3. Bottom Nav & Add Actions
+      if (navSearch) {
+        navSearch.addEventListener("click", () => {
+          if (searchInput) {
+            searchInput.focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      }
+
+      if (navAdd) {
+        navAdd.addEventListener("click", () => {
+          const title = prompt("የሚለጥፉትን ዕቃ ወይም ንብረት ስም ያስገቡ:");
+          if (title) {
+            const price = prompt("ዋጋ በብር ያስገቡ:");
+            if (price) {
+              alert("እንኳን ደስ አሎት! '" + title + "' ማስታወቂያዎ ተመዝግቧል። ወደ ቴሌግራም ቻናል (@DessieMarket) ይተላለፋል!");
+            }
+          }
+        });
+      }
+
+      if (navChat) {
+        navChat.addEventListener("click", () => {
+          alert("የቴሌግራም ቦት (@DessieMarket) ከክፍያ ጋር ተያይዟል!");
+        });
+      }
+
+      if (navProfile) {
+        navProfile.addEventListener("click", () => {
+          alert("ደሴ ማርት (ሙጋድ ገበያ) - ይፋዊ የሞባይል መተግበሪያ ስሪት 1.0.0");
+        });
+      }
+
+      // 4. Service Worker Registration
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").then((reg) => {
+          console.log("✅ ደሴ ማርት ServiceWorker ተመዝግቧል:", reg.scope);
+        }).catch((err) => {
+          console.error("ServiceWorker ስህተት:", err);
+        });
+      }
+    });
   </script>
 </body>
 </html>
