@@ -1,0 +1,19 @@
+{
+  "background_color": "#ff3737",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "ደሴ ማርት_ሙጋድ ገበያ",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "ደሴ_ማርት",
+  "start_url": "/https://dessie-mugad.vercel.app/",
+  "theme_color": "#22db0f",
+  "id": "Com.dessiemart.app",
+  "description": "የደሴ ከተማ ዲጂታል የግብይት መድረክ ሽያጭ ኪራይና ጨረታ እና ማስታወቂያ ማሳለጫ",
+  "lang": "am",
+  "categories": [
+    "business",
+    "finance",
+    "productivity"
+  ]
+}
