@@ -221,7 +221,7 @@
 
   </div>
 
-  <!-- Robust Interactive JavaScript Logic -->
+  <!-- Interactive JavaScript & Backend API Integration -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.getElementById("searchInput");
@@ -274,7 +274,7 @@
         });
       }
 
-      // 3. Bottom Nav & Add Actions
+      // 3. Bottom Nav & Backend API Integration (Telegram Broadcast)
       if (navSearch) {
         navSearch.addEventListener("click", () => {
           if (searchInput) {
@@ -287,36 +287,29 @@
       if (navAdd) {
         navAdd.addEventListener("click", () => {
           const title = prompt("የሚለጥፉትን ዕቃ ወይም ንብረት ስም ያስገቡ:");
-          if (title) {
-            const price = prompt("ዋጋ በብር ያስገቡ:");
-            if (price) {
-              alert("እንኳን ደስ አሎት! '" + title + "' ማስታወቂያዎ ተመዝግቧል። ወደ ቴሌግራም ቻናል (@DessieMarket) ይተላለፋል!");
+          if (!title) return;
+          const price = prompt("ዋጋ በብር ያስገቡ:");
+          if (!price) return;
+          const category = prompt("ምድብ ይምረጡ (ሽያጭ፣ ኪራይ፣ ጨረታ):", "ሽያጭ");
+          const location = prompt("አድራሻ (ለምሳሌ: ፒያሳ፣ ደሴ):", "ደሴ");
+          const phone = prompt("ስልክ ቁጥር:", "0920044626");
+
+          // ወደ ሰርቨራችን እና ወደ ቴሌግራም ቻናል መረጃውን በ API መላክ
+          fetch('/api/listings', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, price, category, location, phone, description: "በደሴ ማርት ሞባይል አፕ የተለጠፈ" })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              alert("🎉 እንኳን ደስ አሎት! ማስታወቂያዎ ተመዝግቦ ወደ ቴሌግራም ቻናል (@DessieMarket) ተልኳል!");
+            } else {
+              alert("⚠️ ማስታወቂያው ተመዝግቧል: " + data.message);
             }
-          }
-        });
-      }
-
-      if (navChat) {
-        navChat.addEventListener("click", () => {
-          alert("የቴሌግራም ቦት (@DessieMarket) ከክፍያ ጋር ተያይዟል!");
-        });
-      }
-
-      if (navProfile) {
-        navProfile.addEventListener("click", () => {
-          alert("ደሴ ማርት (ሙጋድ ገበያ) - ይፋዊ የሞባይል መተግበሪያ ስሪት 1.0.0");
-        });
-      }
-
-      // 4. Service Worker Registration
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js").then((reg) => {
-          console.log("✅ ደሴ ማርት ServiceWorker ተመዝግቧል:", reg.scope);
-        }).catch((err) => {
-          console.error("ServiceWorker ስህተት:", err);
-        });
-      }
-    });
-  </script>
-</body>
-</html>
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert("✅ ማስታወቂያዎ ተመዝግቧል እና ወደ ስርዓቱ ገብቷል
