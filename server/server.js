@@ -15,8 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// የቴሌግራም ቦት ማዋቀሪያ (Telegram Bot Configurations)
-// ማስታወሻ: ትክክለኛውን የቦት ቶከን እና የቻናል ስም እዚህ ያስገቡ
+// የቴሌግራም ቦት ማዋቀሪያ
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || 'YOUR_BOT_TOKEN_HERE';
 const TELEGRAM_CHANNEL = process.env.TELEGRAM_CHANNEL || '@DessieMarket';
 
@@ -29,7 +28,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// 2. ማስታወቂያ የመመዝገቢያ እና የቴሌግራም ብሮድካስት ኤፒአይ (Post Listing & Broadcast API)
+// 2. ማስታወቂያ የመመዝገቢያ እና የቴሌግራም ብሮድካስት ኤፒአይ
 app.post('/api/listings', async (req, res) => {
   try {
     const { title, price, location, category, phone, description } = req.body;
@@ -38,7 +37,6 @@ app.post('/api/listings', async (req, res) => {
       return res.status(400).json({ success: false, message: 'እባክዎ ርዕስ እና ዋጋ በትክክል ይሙሉ!' });
     }
 
-    // የቴሌግራም መልዕክት ቅርጸት (Telegram Broadcast Message Template)
     const telegramMessage = `
 🚨 **አዲስ ማስታወቂያ - ደሴ ማርት (ሙጋድ ገበያ)** 🚨
 
@@ -52,7 +50,7 @@ app.post('/api/listings', async (req, res) => {
 ✨ *በደሴ ማርት ሞባይል አፕ እና ዌብሳይት የተለጠፈ*
     `.trim();
 
-    // ወደ ቴሌግራም ቻናል መላክ (Send to Telegram Channel)
+    // ወደ ቴሌግራም ቻናል መላክ
     if (TELEGRAM_BOT_TOKEN && TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
       await axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         chat_id: TELEGRAM_CHANNEL,
@@ -73,14 +71,11 @@ app.post('/api/listings', async (req, res) => {
   }
 });
 
-// 3. የቴሌብር እና ሲቢኢ ክፍያ ዌብሁክ (Telebirr & CBE Birr Payment Webhook)
+// 3. የቴሌብር እና ሲቢኢ ክፍያ ዌብሁክ
 app.post('/api/webhook/payment', async (req, res) => {
   try {
     const paymentData = req.body;
-    console.log('💳 የተቀበለው የክፍያ መረጃ (Payment Webhook Received):', paymentData);
-
-    // እዚህ ጋር የክፍያ ማረጋገጫ (Transaction Verification) ይከናወናል
-    // ክፍያው የተሳካ ከሆነ ተጠቃሚው የለጠፈው ማስታወቂያ በቀጥታ ወደ ቻናሉ እንዲለቀቅ ይደረጋል
+    console.log('💳 የተቀበለው የክፍያ መረጃ:', paymentData);
 
     res.status(200).json({
       status: 'RECEIVED',
@@ -93,7 +88,12 @@ app.post('/api/webhook/payment', async (req, res) => {
   }
 });
 
-// ሰርቨርን ማስጀመር
-app.listen(PORT, () => {
-  console.log(`🚀 ደሴ ማርት ሰርቨር በፖርት ${PORT} ላይ በመስራት ላይ ይገኛል...`);
-});
+// ★ ለ Vercel ሰርቨርለስ አሰራር አፕሊኬሽኑን ማስረከብ (Export)
+module.exports = app;
+
+// በሎካል ኮምፒዩተር ሲሰራ ብቻ በፖርት 3000 ማሰማራት
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 ደሴ ማርት ሰርቨር በፖርት ${PORT} ላይ በመስራት ላይ ይገኛል...`);
+  });
+}
