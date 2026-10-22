@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="am" dir="ltr">
 <head>
   <meta charset="utf-8"/>
@@ -192,28 +192,28 @@
       </div>
     </main>
 
-    <!-- ⬛ Bottom Nav Bar -->
+    <!-- ⬛ Bottom Nav Bar (ሁሉም አዝራሮች የተሳሰሩበት) -->
     <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-darkFrame text-slate-400 z-50 px-4 py-2 flex items-center justify-between border-t border-slate-800">
-      <a href="#" class="flex flex-col items-center text-white gap-0.5">
+      <button id="navHome" class="flex flex-col items-center text-white gap-0.5 cursor-pointer">
         <span class="material-symbols-outlined text-xl">home</span>
         <span class="text-[10px] font-bold">መነሻ</span>
-      </a>
+      </button>
 
-      <button id="navSearch" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navSearchTab" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
         <span class="material-symbols-outlined text-xl">search</span>
         <span class="text-[10px] font-medium">ፍለጋ</span>
       </button>
 
-      <button id="navAdd" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform">
+      <button id="navAdd" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform cursor-pointer">
         <span class="material-symbols-outlined text-2xl font-black">add</span>
       </button>
 
-      <button id="navChat" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navChat" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
         <span class="material-symbols-outlined text-xl">chat</span>
         <span class="text-[10px] font-medium">መልእክቶች</span>
       </button>
 
-      <button id="navProfile" class="flex flex-col items-center hover:text-white gap-0.5">
+      <button id="navProfile" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
         <span class="material-symbols-outlined text-xl">person</span>
         <span class="text-[10px] font-medium">መለያ</span>
       </button>
@@ -221,7 +221,7 @@
 
   </div>
 
-  <!-- 📝 Post Listing Modal Form (አዲስ ማስታወቂያ መለቂያ ፖፕ-አፕ) -->
+  <!-- 📝 Post Listing Modal Form -->
   <div id="postModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4 hidden">
     <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl relative border border-slate-100">
       <div class="flex items-center justify-between border-b pb-3 mb-3">
@@ -280,7 +280,10 @@
       const catSales = document.getElementById("catSales");
       const catRentals = document.getElementById("catRentals");
       const catTenders = document.getElementById("catTenders");
-      const navSearch = document.getElementById("navSearch");
+      
+      // Bottom Nav Elements
+      const navHome = document.getElementById("navHome");
+      const navSearchTab = document.getElementById("navSearchTab");
       const navAdd = document.getElementById("navAdd");
       const navChat = document.getElementById("navChat");
       const navProfile = document.getElementById("navProfile");
@@ -333,14 +336,48 @@
         });
       }
 
-      // 3. Modal Show & Hide
+      // 3. Modal Show & Hide Actions
       function openModal() { postModal.classList.remove("hidden"); }
       function closeModal() { postModal.classList.add("hidden"); }
 
       if (navAdd) navAdd.addEventListener("click", openModal);
       if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
 
-      // 4. Submit Form Direct to Telegram
+      // 4. Bottom Nav Actions (ሁሉም አዝራሮች አሁን ይሰራሉ!)
+      if (navHome) {
+        navHome.addEventListener("click", (e) => {
+          e.preventDefault();
+          cards.forEach(card => card.style.display = "flex");
+          if (searchInput) searchInput.value = "";
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      if (navSearchTab) {
+        navSearchTab.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (searchInput) {
+            searchInput.focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+      }
+
+      if (navChat) {
+        navChat.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.open("https://t.me/DessieMarket", "_blank");
+        });
+      }
+
+      if (navProfile) {
+        navProfile.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert("ደሴ ማርት (ሙጋድ ገበያ) - ይፋዊ የሞባይል መተግበሪያ ስሪት 1.0.0\nለድጋፍ በስልክ ቁጥር 0920044626 ይደውሉልን።");
+        });
+      }
+
+      // 5. Submit Form Direct to Telegram
       if (postForm) {
         postForm.addEventListener("submit", async (e) => {
           e.preventDefault();
@@ -385,28 +422,7 @@
         });
       }
 
-      if (navSearch) {
-        navSearch.addEventListener("click", () => {
-          if (searchInput) {
-            searchInput.focus();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-        });
-      }
-
-      if (navChat) {
-        navChat.addEventListener("click", () => {
-          window.open("https://t.me/DessieMarket", "_blank");
-        });
-      }
-
-      if (navProfile) {
-        navProfile.addEventListener("click", () => {
-          alert("ደሴ ማርት (ሙጋድ ገበያ) - ይፋዊ የሞባይል መተግበሪያ ስሪት 1.0.0");
-        });
-      }
-
-      // 5. Service Worker Registration
+      // 6. Service Worker Registration
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js").then((reg) => {
           console.log("✅ ደሴ ማርት ServiceWorker ተመዝግቧል:", reg.scope);
