@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="am" dir="ltr">
 <head>
   <meta charset="utf-8"/>
@@ -221,7 +221,57 @@
 
   </div>
 
-  <!-- Interactive JavaScript & Backend API Integration -->
+  <!-- 📝 Post Listing Modal Form (አዲስ ማስታወቂያ መለቂያ ፖፕ-አፕ) -->
+  <div id="postModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl relative border border-slate-100">
+      <div class="flex items-center justify-between border-b pb-3 mb-3">
+        <h3 class="text-base font-extrabold text-black">አዲስ ማስታወቂያ ይለጥፉ</h3>
+        <button id="closeModalBtn" class="text-slate-400 hover:text-red-500">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+
+      <form id="postForm" class="space-y-3">
+        <div>
+          <label class="text-[11px] font-bold text-slate-600 block mb-1">የዕቃው / ንብረቱ ስም *</label>
+          <input type="text" id="postTitle" required placeholder="ለምሳሌ: Vitz 2018 ወይም G+1 ቪላ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none focus:border-brandBlue"/>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">ዋጋ (ብር) *</label>
+            <input type="number" id="postPrice" required placeholder="150000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none focus:border-brandBlue"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">ምድብ</label>
+            <select id="postCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-xs outline-none focus:border-brandBlue font-bold">
+              <option value="ሽያጭ">ሽያጭ</option>
+              <option value="ኪራይ">ኪራይ</option>
+              <option value="ጨረታ">ጨረታ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">አድራሻ</label>
+            <input type="text" id="postLocation" value="ደሴ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none focus:border-brandBlue"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">ስልክ ቁጥር</label>
+            <input type="tel" id="postPhone" value="0920044626" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none focus:border-brandBlue"/>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-brandOrange text-white font-extrabold text-xs py-3 rounded-xl shadow-lg shadow-brandOrange/30 active:scale-95 transition-all flex items-center justify-center gap-1 mt-2">
+          <span class="material-symbols-outlined text-sm">send</span>
+          <span>ወደ ቴሌግራም ቻናል ይለጥፉ</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const searchInput = document.getElementById("searchInput");
@@ -235,6 +285,15 @@
       const navChat = document.getElementById("navChat");
       const navProfile = document.getElementById("navProfile");
       const cards = document.querySelectorAll(".listing-card");
+
+      // Modal Elements
+      const postModal = document.getElementById("postModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+      const postForm = document.getElementById("postForm");
+
+      // ቴሌግራም ቦት መረጃ
+      const BOT_TOKEN = "8839692572:AAECMsxjgvTpsQI_hshWLYs7EvQgRhqYGs";
+      const CHANNEL_ID = "@DessieMarket";
 
       // 1. Live Search
       if (searchInput) {
@@ -274,7 +333,58 @@
         });
       }
 
-      // 3. Bottom Nav & Backend API Integration (Telegram Broadcast)
+      // 3. Modal Show & Hide
+      function openModal() { postModal.classList.remove("hidden"); }
+      function closeModal() { postModal.classList.add("hidden"); }
+
+      if (navAdd) navAdd.addEventListener("click", openModal);
+      if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+
+      // 4. Submit Form Direct to Telegram
+      if (postForm) {
+        postForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const title = document.getElementById("postTitle").value;
+          const price = document.getElementById("postPrice").value;
+          const category = document.getElementById("postCategory").value;
+          const location = document.getElementById("postLocation").value;
+          const phone = document.getElementById("postPhone").value;
+
+          const submitBtn = document.getElementById("submitBtn");
+          submitBtn.disabled = true;
+          submitBtn.innerText = "በመላክ ላይ...";
+
+          const messageText = `🚨 *አዲስ ማስታወቂያ - ደሴ ማርት (ሙጋድ ገበያ)* 🚨\n\n📌 *ርዕስ:* ${title}\n📂 *ምድብ:* ${category}\n💰 *ዋጋ:* ${price} ብር\n📍 *አድራሻ:* ${location}\n📞 *ስልክ:* ${phone}\n\n✨ *በደሴ ማርት ሞባይል መተግበሪያ የተለጠፈ*`;
+
+          try {
+            const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: CHANNEL_ID,
+                text: messageText,
+                parse_mode: 'Markdown'
+              })
+            });
+
+            const data = await res.json();
+            if (data.ok) {
+              alert("🎉 እንኳን ደስ አሎት! ማስታወቂያዎ ተመዝግቦ በሰከንዶች ውስጥ ወደ ቴሌግራም ቻናል (@DessieMarket) ተልኳል!");
+              postForm.reset();
+              closeModal();
+            } else {
+              alert("⚠️ ማስታወቂያውን መላክ አልተቻለም፦ " + data.description);
+            }
+          } catch (err) {
+            console.error(err);
+            alert("❌ የኔትወርክ ስህተት አጋጥሟል!");
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm">send</span><span>ወደ ቴሌግራም ቻናል ይለጥፉ</span>`;
+          }
+        });
+      }
+
       if (navSearch) {
         navSearch.addEventListener("click", () => {
           if (searchInput) {
@@ -284,32 +394,27 @@
         });
       }
 
-      if (navAdd) {
-        navAdd.addEventListener("click", () => {
-          const title = prompt("የሚለጥፉትን ዕቃ ወይም ንብረት ስም ያስገቡ:");
-          if (!title) return;
-          const price = prompt("ዋጋ በብር ያስገቡ:");
-          if (!price) return;
-          const category = prompt("ምድብ ይምረጡ (ሽያጭ፣ ኪራይ፣ ጨረታ):", "ሽያጭ");
-          const location = prompt("አድራሻ (ለምሳሌ: ፒያሳ፣ ደሴ):", "ደሴ");
-          const phone = prompt("ስልክ ቁጥር:", "0920044626");
+      if (navChat) {
+        navChat.addEventListener("click", () => {
+          window.open("https://t.me/DessieMarket", "_blank");
+        });
+      }
 
-          // ወደ ሰርቨራችን እና ወደ ቴሌግራም ቻናል መረጃውን በ API መላክ
-          fetch('/api/listings', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title, price, category, location, phone, description: "በደሴ ማርት ሞባይል አፕ የተለጠፈ" })
-          })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              alert("🎉 እንኳን ደስ አሎት! ማስታወቂያዎ ተመዝግቦ ወደ ቴሌግራም ቻናል (@DessieMarket) ተልኳል!");
-            } else {
-              alert("⚠️ ማስታወቂያው ተመዝግቧል: " + data.message);
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert("✅ ማስታወቂያዎ ተመዝግቧል እና ወደ ስርዓቱ ገብቷል
+      if (navProfile) {
+        navProfile.addEventListener("click", () => {
+          alert("ደሴ ማርት (ሙጋድ ገበያ) - ይፋዊ የሞባይል መተግበሪያ ስሪት 1.0.0");
+        });
+      }
+
+      // 5. Service Worker Registration
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").then((reg) => {
+          console.log("✅ ደሴ ማርት ServiceWorker ተመዝግቧል:", reg.scope);
+        }).catch((err) => {
+          console.error("ServiceWorker ስህተት:", err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
