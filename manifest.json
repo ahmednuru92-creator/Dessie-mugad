@@ -1,23 +1,11 @@
 {
-  "background_color": "#ff3737",
-  "dir": "ltr",
+  "name": "ደሴ ማርት (ሙጋድ ገበያ)",
+  "short_name": "ደሴ ማርት",
+  "start_url": "/",
   "display": "standalone",
-  "name": "ደሴ ማርት_ሙጋድ ገበያ",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "ደሴ_ማርት",
-  "start_url": "https://dessie-mugad.vercel.app/",
-  "theme_color": "#22db0f",
-  "id": "Com.dessiemart.app",
-  "description": "የደሴ ከተማ ዲጂታል የኅብረት መድረክ ሽያጭ ኪራይ ጨረታ እና ማስታወቂያ ማሳለጫ",
-  "lang": "am",
-  "categories": [
-    "business",
-    "finance",
-    "productivity",
-    "shopping",
-    "lifestyle"
-  ],
+  "background_color": "#0b0f19",
+  "theme_color": "#1254d6",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png",
