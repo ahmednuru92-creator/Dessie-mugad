@@ -3,7 +3,7 @@
   "short_name": "ደሴ ማርት",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b0f19",
+  "background_color": "#0cf5f9",
   "theme_color": "#1254d6",
   "orientation": "portrait",
   "icons": [
@@ -19,5 +19,14 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "id": "Com.dessiemart.app",
+  "description": "በደሴ ከተማ የታወቀ የዲጂታል ንግድ መድረክ፤ ሽያጭ፣ ኪራይ፣ ጨረታ ማስታወቂያዎች ማላጫ",
+  "categories": [
+    "business",
+    "finance",
+    "productivity",
+    "shopping"
+  ],
+  "lang": "am"
 }
