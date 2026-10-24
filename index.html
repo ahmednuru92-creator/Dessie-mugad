@@ -34,18 +34,17 @@
   <style>
     body { font-family: 'Noto Sans Ethiopic', 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="bg-[#0b0f19] text-slate-900 flex justify-center min-h-screen selection:bg-brandOrange/30">
+<body class="bg-[#0b0f19] text-slate-900 flex justify-center min-h-screen">
 
   <div class="w-full max-w-md bg-surfaceBg min-h-screen flex flex-col relative shadow-2xl border-x border-slate-800 pb-24">
 
-    <!-- 🔝 Header (የራስጌ አሞሌ) -->
+    <!-- 🔝 Header -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 py-3 border-b border-slate-200 flex items-center justify-between shadow-sm">
       <div class="flex items-center gap-2.5">
         <div class="w-10 h-10 rounded-2xl overflow-hidden bg-white p-0.5 shadow-md shadow-brandBlue/20 flex items-center justify-center border border-slate-100">
-          <img src="/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png" alt="ደሴ ማርት ሎጎ" class="w-full h-full object-cover rounded-xl"/>
+          <img src="/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png" alt="ሎጎ" class="w-full h-full object-cover rounded-xl"/>
         </div>
         <div>
           <div class="flex items-center gap-1.5">
@@ -56,10 +55,10 @@
         </div>
       </div>
       <div>
-        <button id="btnHeaderWallet" class="flex items-center gap-1 px-2.5 py-1.5 bg-brandOrange/10 text-brandOrange font-extrabold text-xs rounded-full border border-brandOrange/20 active:scale-95 transition-all">
-          <span class="material-symbols-outlined text-[15px]">account_balance_wallet</span>
-          <span id="txtHeaderWallet">500.00 Br</span>
-        </button>
+        <a href="tel:0920044626" class="flex items-center gap-1 px-3 py-1.5 bg-brandOrange/10 text-brandOrange font-extrabold text-xs rounded-full border border-brandOrange/20">
+          <span class="material-symbols-outlined text-sm">phone_in_talk</span>
+          <span>0920 04 46 26</span>
+        </a>
       </div>
     </header>
 
@@ -67,132 +66,108 @@
     
     <!-- VIEW 1: HOME -->
     <div id="viewHome" class="flex-1 flex flex-col">
-      <!-- Search Input -->
       <div class="px-4 pt-3 pb-2">
-        <div class="flex items-center gap-2 bg-white rounded-2xl px-3.5 py-2.5 border border-slate-200 shadow-sm focus-within:border-brandBlue transition-all">
+        <div class="flex items-center gap-2 bg-white rounded-2xl px-3.5 py-2.5 border border-slate-200 shadow-sm">
           <span class="material-symbols-outlined text-slate-400 text-xl">search</span>
           <input type="text" id="searchInput" placeholder="መኪና፣ ቤት፣ ጀነሬተር ወይም ዕቃ ይፈልጉ..." class="w-full bg-transparent text-xs font-medium text-slate-800 placeholder-slate-400 outline-none"/>
-          <button id="btnClearSearch" class="text-slate-400 hover:text-brandBlue">
+          <button onclick="resetFilters()" class="text-slate-400 hover:text-brandBlue">
             <span class="material-symbols-outlined text-xl">close</span>
           </button>
         </div>
       </div>
 
-      <!-- Category Buttons -->
+      <!-- Categories -->
       <div class="px-4 py-2 grid grid-cols-3 gap-2.5">
-        <button id="btnCatSales" class="bg-brandOrange text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandOrange/25 active:scale-95 transition-all">
+        <button onclick="filterCat('ሽያጭ')" class="bg-brandOrange text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
             <span class="material-symbols-outlined text-2xl">shopping_bag</span>
           </div>
           <span class="text-sm font-extrabold">ሽያጭ</span>
-          <span class="text-[10px] text-white/80 font-medium">Sales</span>
+          <span class="text-[10px] text-white/80">Sales</span>
         </button>
 
-        <button id="btnCatRentals" class="bg-brandBlue text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandBlue/25 active:scale-95 transition-all">
+        <button onclick="filterCat('ኪራይ')" class="bg-brandBlue text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
             <span class="material-symbols-outlined text-2xl">key</span>
           </div>
           <span class="text-sm font-extrabold">ኪራይ</span>
-          <span class="text-[10px] text-white/80 font-medium">Rentals</span>
+          <span class="text-[10px] text-white/80">Rentals</span>
         </button>
 
-        <button id="btnCatTenders" class="bg-brandLime text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandLime/25 active:scale-95 transition-all">
+        <button onclick="filterCat('ጨረታ')" class="bg-brandLime text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
             <span class="material-symbols-outlined text-2xl">gavel</span>
           </div>
           <span class="text-sm font-extrabold">ጨረታ</span>
-          <span class="text-[10px] text-white/80 font-medium">Tenders</span>
+          <span class="text-[10px] text-white/80">Tenders</span>
         </button>
       </div>
 
-      <!-- Feed Container -->
       <main class="flex-1 px-4 py-2 space-y-3">
         <div class="flex items-center justify-between pt-1">
           <h2 class="text-sm font-extrabold text-black flex items-center gap-1.5">
             <span>የተመረጡ ማስታወቂያዎች</span>
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           </h2>
-          <button id="btnResetFilter" class="text-xs font-bold text-brandBlue hover:underline">ሁሉንም እይ</button>
+          <button onclick="resetFilters()" class="text-xs font-bold text-brandBlue hover:underline">ሁሉንም እይ</button>
         </div>
 
-        <div id="feedList" class="space-y-3">
-          <div class="listing-card bg-white rounded-2xl p-3 border border-slate-200/80 shadow-sm flex gap-3 relative" data-category="ሽያጭ" data-title="Toyota Vitz 2018 መኪና">
-            <div class="w-28 h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
-              <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=500&auto=format&fit=crop&q=80" alt="Toyota Vitz" class="w-full h-full object-cover"/>
-              <span class="absolute top-1.5 left-1.5 bg-brandOrange text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md">ሽያጭ</span>
+        <div class="listing-card bg-white rounded-2xl p-3 border border-slate-200 shadow-sm flex gap-3" data-category="ሽያጭ" data-title="Toyota Vitz 2018 መኪና">
+          <div class="w-28 h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
+            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=500&auto=format&fit=crop&q=80" alt="Vitz" class="w-full h-full object-cover"/>
+            <span class="absolute top-1.5 left-1.5 bg-brandOrange text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md">ሽያጭ</span>
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs font-extrabold text-black">Toyota Vitz 2018</h3>
+              <p class="text-[10px] text-slate-500 mt-0.5">📍 ፒያሳ፣ ደሴ</p>
             </div>
-            <div class="flex-1 flex flex-col justify-between">
+            <div class="flex items-end justify-between mt-2">
               <div>
-                <h3 class="text-xs font-extrabold text-black leading-tight">Toyota Vitz 2018</h3>
-                <p class="text-[10px] text-slate-500 flex items-center gap-0.5 mt-0.5">
-                  <span class="material-symbols-outlined text-[13px] text-slate-400">location_on</span>
-                  <span class="text-black font-semibold">ፒያሳ፣ ደሴ</span>
-                </p>
+                <span class="text-[9px] text-slate-400 font-bold block uppercase">ዋጋ</span>
+                <span class="text-sm font-black text-black">1,450,000 ብር</span>
               </div>
-              <div class="flex items-end justify-between mt-2">
-                <div>
-                  <span class="text-[9px] text-slate-400 font-bold block uppercase">ዋጋ</span>
-                  <span class="text-sm font-black text-black">1,450,000 ብር</span>
-                </div>
-                <a href="tel:0920044626" class="px-2.5 py-1.5 rounded-xl bg-darkFrame text-white text-[10px] font-bold flex items-center gap-1 active:scale-95 transition-all">
-                  <span class="material-symbols-outlined text-[13px]">call</span>
-                  <span>ደውል</span>
-                </a>
-              </div>
+              <a href="tel:0920044626" class="px-2.5 py-1.5 rounded-xl bg-darkFrame text-white text-[10px] font-bold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[13px]">call</span> ደውል
+              </a>
             </div>
           </div>
+        </div>
 
-          <div class="listing-card bg-white rounded-2xl p-3 border border-slate-200/80 shadow-sm flex gap-3 relative" data-category="ኪራይ" data-title="ዘመናዊ G+1 ቪላ ቤት ኪራይ">
-            <div class="w-28 h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=80" alt="House" class="w-full h-full object-cover"/>
-              <span class="absolute top-1.5 left-1.5 bg-brandBlue text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md">ኪራይ</span>
+        <div class="listing-card bg-white rounded-2xl p-3 border border-slate-200 shadow-sm flex gap-3" data-category="ኪራይ" data-title="ዘመናዊ G+1 ቪላ ቤት ኪራይ">
+          <div class="w-28 h-24 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0 relative">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&auto=format&fit=crop&q=80" alt="House" class="w-full h-full object-cover"/>
+            <span class="absolute top-1.5 left-1.5 bg-brandBlue text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-md">ኪራይ</span>
+          </div>
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-xs font-extrabold text-black">ዘመናዊ G+1 ቪላ ቤት</h3>
+              <p class="text-[10px] text-slate-500 mt-0.5">📍 ሸበሌ፣ ደሴ</p>
             </div>
-            <div class="flex-1 flex flex-col justify-between">
+            <div class="flex items-end justify-between mt-2">
               <div>
-                <h3 class="text-xs font-extrabold text-black leading-tight">ዘመናዊ G+1 ቪላ ቤት</h3>
-                <p class="text-[10px] text-slate-500 flex items-center gap-0.5 mt-0.5">
-                  <span class="material-symbols-outlined text-[13px] text-slate-400">location_on</span>
-                  <span class="text-black font-semibold">ሸበሌ፣ ደሴ</span>
-                </p>
+                <span class="text-[9px] text-slate-400 font-bold block uppercase">ወርሃዊ ኪራይ</span>
+                <span class="text-sm font-black text-black">18,000 ብር</span>
               </div>
-              <div class="flex items-end justify-between mt-2">
-                <div>
-                  <span class="text-[9px] text-slate-400 font-bold block uppercase">ኪራይ / ወር</span>
-                  <span class="text-sm font-black text-black">18,000 ብር/ወር</span>
-                </div>
-                <a href="tel:0920044626" class="px-2.5 py-1.5 rounded-xl bg-darkFrame text-white text-[10px] font-bold flex items-center gap-1 active:scale-95 transition-all">
-                  <span class="material-symbols-outlined text-[13px]">call</span>
-                  <span>ደውል</span>
-                </a>
-              </div>
+              <a href="tel:0920044626" class="px-2.5 py-1.5 rounded-xl bg-darkFrame text-white text-[10px] font-bold flex items-center gap-1">
+                <span class="material-symbols-outlined text-[13px]">call</span> ደውል
+              </a>
             </div>
           </div>
         </div>
       </main>
     </div>
 
-    <!-- VIEW 2: SEARCH / DIRECTORY -->
+    <!-- VIEW 2: SEARCH -->
     <div id="viewSearch" class="flex-1 px-4 py-4 hidden space-y-4">
-      <h2 class="text-base font-extrabold text-black">የንግድ ማውጫ እና ማጣሪያ</h2>
+      <h2 class="text-base font-extrabold text-black">የንግድ ማውጫ እና ዘርፎች</h2>
       <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <label class="text-xs font-bold text-slate-700 block">በደሴ ከተማ ውስጥ ያሉ ዋና ዋና ዘርፎች:</label>
+        <label class="text-xs font-bold text-slate-700 block">የደሴ ከተማ ዋና ዘርፎች:</label>
         <div class="grid grid-cols-2 gap-2">
-          <button class="btn-subcat p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100 flex items-center gap-2" data-cat="ሽያጭ">
-            <span class="material-symbols-outlined text-brandOrange text-sm">home_work</span>
-            <span>የግንባታ እቃዎች</span>
-          </button>
-          <button class="btn-subcat p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100 flex items-center gap-2" data-cat="ሽያጭ">
-            <span class="material-symbols-outlined text-brandBlue text-sm">devices</span>
-            <span>ኤሌክትሮኒክስ</span>
-          </button>
-          <button class="btn-subcat p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100 flex items-center gap-2" data-cat="ሽያጭ">
-            <span class="material-symbols-outlined text-brandLime text-sm">directions_car</span>
-            <span>አውቶሞቲቭ</span>
-          </button>
-          <button class="btn-subcat p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100 flex items-center gap-2" data-cat="ኪራይ">
-            <span class="material-symbols-outlined text-purple-600 text-sm">apartment</span>
-            <span>ሪል እስቴት</span>
-          </button>
+          <button onclick="filterCat('ሽያጭ')" class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left border border-slate-100">የግንባታ እቃዎች</button>
+          <button onclick="filterCat('ሽያጭ')" class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left border border-slate-100">ኤሌክትሮኒክስ</button>
+          <button onclick="filterCat('ሽያጭ')" class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left border border-slate-100">አውቶሞቲቭ</button>
+          <button onclick="filterCat('ኪራይ')" class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left border border-slate-100">ሪል እስቴት</button>
         </div>
       </div>
     </div>
@@ -203,7 +178,84 @@
         <span class="material-symbols-outlined text-brandOrange">account_balance_wallet</span>
         <span>የዋሌት እና የሂሳብ አስተዳደር</span>
       </h2>
-      <div class="bg-gradient-to-br from-brandOrange to-amber-600 rounded-3xl p-5 text-white shadow-xl shadow-brandOrange/20 space-y-3">
-        <span class="text-xs font-medium text-white/80 uppercase tracking-wider block">አጠቃላይ ቀሪ ሂሳብ (Wallet Balance)</span>
-        <div class="text-3xl font-black" id="txtWalletBig">500.00 ብር</div>
-        <button id="btnOpenTopup" class="w-full bg-white text-brandOrange font-extrabold text-xs py-2.
+      <div class="bg-gradient-to-br from-brandOrange to-amber-600 rounded-3xl p-5 text-white shadow-xl space-y-3">
+        <span class="text-xs font-medium text-white/80 uppercase block">አጠቃላይ ቀሪ ሂሳብ</span>
+        <div class="text-3xl font-black" id="walletBalanceBig">500.00 ብር</div>
+        <button onclick="openTopupModal()" class="w-full bg-white text-brandOrange font-extrabold text-xs py-2.5 rounded-xl shadow-md mt-2">ሂሳብ ጫን (Top-up)</button>
+      </div>
+    </div>
+
+    <!-- VIEW 4: PROFILE -->
+    <div id="viewProfile" class="flex-1 px-4 py-4 hidden space-y-4">
+      <h2 class="text-base font-extrabold text-black">የተጠቃሚ መለያ</h2>
+      <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-center">
+        <div class="w-16 h-16 rounded-full bg-brandBlue/10 text-brandBlue flex items-center justify-center mx-auto text-2xl font-black">ደ</div>
+        <h3 class="text-sm font-extrabold text-black">ደሴ ማርት (ሙጋድ ገበያ) ተጠቃሚ</h3>
+        <p class="text-xs text-slate-500">ስልክ: 0920 04 46 26 | ደሴ፣ ኢትዮጵያ</p>
+        <a href="https://t.me/DessieMarket" target="_blank" class="block w-full py-2.5 bg-brandBlue text-white rounded-xl text-xs font-extrabold shadow-md">ኦፊሴላዊ ቴሌግራም ቻናል (@DessieMarket)</a>
+      </div>
+    </div>
+
+    <!-- ⬛ BOTTOM NAV BAR -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-darkFrame text-slate-400 z-50 px-4 py-2 flex items-center justify-between border-t border-slate-800 shadow-2xl">
+      <button onclick="switchTab('home')" class="flex flex-col items-center text-white gap-0.5 cursor-pointer">
+        <span class="material-symbols-outlined text-xl">home</span>
+        <span class="text-[10px] font-bold">መነሻ</span>
+      </button>
+
+      <button onclick="switchTab('search')" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
+        <span class="material-symbols-outlined text-xl">search</span>
+        <span class="text-[10px] font-medium">ፍለጋ</span>
+      </button>
+
+      <button onclick="openPostModal()" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform cursor-pointer">
+        <span class="material-symbols-outlined text-2xl font-black">add</span>
+      </button>
+
+      <button onclick="switchTab('wallet')" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
+        <span class="material-symbols-outlined text-xl">account_balance_wallet</span>
+        <span class="text-[10px] font-medium">ዋሌት</span>
+      </button>
+
+      <button onclick="switchTab('profile')" class="flex flex-col items-center hover:text-white gap-0.5 cursor-pointer">
+        <span class="material-symbols-outlined text-xl">person</span>
+        <span class="text-[10px] font-medium">መለያ</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- 📝 POST MODAL -->
+  <div id="postModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4 hidden">
+    <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b pb-3 mb-3">
+        <h3 class="text-base font-extrabold text-black">አዲስ ማስታወቂያ ይለጥፉ</h3>
+        <button onclick="closePostModal()" class="text-slate-400 hover:text-red-500">
+          <span class="material-symbols-outlined text-2xl">close</span>
+        </button>
+      </div>
+
+      <form id="postForm" onsubmit="handlePostSubmit(event)" class="space-y-3">
+        <div>
+          <label class="text-[11px] font-bold text-slate-600 block mb-1">የዕቃው / ንብረቱ ስም *</label>
+          <input type="text" id="postTitle" required placeholder="ለምሳሌ: Vitz 2018" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none"/>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">ዋጋ (ብር) *</label>
+            <input type="number" id="postPrice" required placeholder="150000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs outline-none"/>
+          </div>
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">ምድብ</label>
+            <select id="postCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-2 py-2 text-xs outline-none font-bold">
+              <option value="ሽያጭ">ሽያጭ</option>
+              <option value="ኪራይ">ኪራይ</option>
+              <option value="ጨረታ">ጨረታ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="text-[11px] font-bold text-slate-600 block mb-1">አድራ
