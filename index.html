@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>ደሴ ማርት (ሙጋድ ገበያ) — Dessie Mart</title>
+  <title>ደሴ ማርት (ሙጋድ ገበያ) — የተሟላ ፕሪሚየም መድረክ</title>
   <meta name="theme-color" content="#1254d6"/>
   <link rel="manifest" href="/manifest.json"/>
   <link rel="icon" type="image/png" sizes="192x192" href="/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png">
@@ -41,10 +41,10 @@
 
   <div class="w-full max-w-md bg-surfaceBg min-h-screen flex flex-col relative shadow-2xl border-x border-slate-200/80 pb-24">
 
-    <!-- 🔝 Header (የራስጌ አሞሌ - ከእርስዎ ሎጎ እና ንድፍ ጋር) -->
+    <!-- 🔝 Header -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md px-4 py-3 border-b border-slate-100 flex items-center justify-between shadow-sm">
       <div class="flex items-center gap-2.5">
-        <div class="w-10 h-10 rounded-2xl overflow-hidden bg-white p-0.5 shadow-md shadow-brandBlue/20 flex items-center justify-center border border-slate-100">
+        <div class="w-10 h-10 rounded-2xl overflow-hidden bg-white p-0.5 shadow-md shadow-brandBlue/20 flex items-center justify-center">
           <img src="/a_premium_modern_mobile_app_icon_ios_android_app_icon_for_dessie_mart._squircle.png" alt="ደሴ ማርት ሎጎ" class="w-full h-full object-cover rounded-xl"/>
         </div>
         <div>
@@ -52,7 +52,7 @@
             <h1 class="text-base font-extrabold text-black tracking-tight leading-none">ደሴ ማርት</h1>
             <span class="material-symbols-outlined text-brandBlue text-sm">verified</span>
           </div>
-          <p class="text-[11px] text-slate-500 font-medium mt-0.5">ሙጋድ ገበያ • ደሴ፣ ኢትዮጵያ</p>
+          <p class="text-[11px] text-slate-500 font-medium mt-0.5">ሙጋድ ገበያ • የተሟላ ንግድ መድረክ</p>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -63,11 +63,11 @@
       </div>
     </header>
 
-    <!-- 📱 VIEWS (ተለዋዋጭ ገጾች) -->
+    <!-- 📱 Dynamic View Containers (Views Switcher) -->
     
-    <!-- VIEW 1: HOME (መነሻ ገጽ) -->
+    <!-- VIEW 1: HOME / FEED VIEW -->
     <div id="viewHome" class="flex-1 flex flex-col">
-      <!-- 🔍 Search Bar -->
+      <!-- 🔍 Search & Filter Bar -->
       <div class="px-4 pt-3 pb-2">
         <div class="flex items-center gap-2 bg-white rounded-2xl px-3.5 py-2.5 border border-slate-200 shadow-sm focus-within:border-brandBlue transition-all">
           <span class="material-symbols-outlined text-slate-400 text-xl">search</span>
@@ -78,7 +78,7 @@
         </div>
       </div>
 
-      <!-- 📂 Main Categories (ባለ 3-ቀለም ፎልደሮች) -->
+      <!-- 📂 Main Categories -->
       <div class="px-4 py-2 grid grid-cols-3 gap-2.5">
         <button id="catSales" class="bg-brandOrange text-white rounded-2xl p-3.5 flex flex-col items-center justify-center text-center shadow-md shadow-brandOrange/25 active:scale-95 transition-all">
           <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center mb-1.5">
@@ -175,12 +175,12 @@
     <div id="viewSearch" class="flex-1 px-4 py-4 hidden space-y-4">
       <h2 class="text-base font-extrabold text-black">የንግድ ማውጫ እና ማጣሪያ</h2>
       <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-        <label class="text-xs font-bold text-slate-700 block">በደሴ ከተማ ውስጥ ያሉ ዘርፎች:</label>
+        <label class="text-xs font-bold text-slate-700 block">በከተማው ውስጥ ያሉ ዘርፎች:</label>
         <div class="grid grid-cols-2 gap-2">
           <button class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100">የግንባታ እቃዎች</button>
           <button class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100">ኤሌክትሮኒክስ</button>
           <button class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100">አውቶሞቲቭ</button>
-          <button class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100">ሪል እስቴት</button>
+          <button class="p-3 bg-slate-50 hover:bg-brandBlue hover:text-white rounded-xl text-xs font-extrabold text-left transition-all border border-slate-100">Real Estate</button>
         </div>
       </div>
     </div>
@@ -196,6 +196,7 @@
         <div class="text-3xl font-black" id="walletBalanceBig">500.00 ብር</div>
         <div class="pt-2 flex gap-2">
           <button id="openTopupModalBtn" class="flex-1 bg-white text-brandOrange font-extrabold text-xs py-2.5 rounded-xl shadow-md">ሂሳብ ጫን (Top-up)</button>
+          <button id="viewHistoryBtn" class="bg-white/20 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl">የግብይት ታሪክ</button>
         </div>
       </div>
       <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
@@ -212,13 +213,13 @@
         <h3 class="text-sm font-extrabold text-black">ደሴ ማርት (ሙጋድ ገበያ) ተጠቃሚ</h3>
         <p class="text-xs text-slate-500">ስልክ: 0920044626 | ደሴ፣ ኢትዮጵያ</p>
         <div class="pt-2">
-          <a href="https://t.me/DessieMarket" target="_blank" class="block w-full py-2.5 bg-brandBlue text-white rounded-xl text-xs font-extrabold shadow-md">ኦፊሴላዊ የቴሌግራም ቻናል ይቀላቀሉ (@DessieMarket)</a>
+          <a href="https://t.me/DessieMarket" target="_blank" class="block w-full py-2.5 bg-brandBlue text-white rounded-xl text-xs font-extrabold shadow-md">ኦፊሴላዊ የቴሌግራም ቻናል ይቀላቀሉ</a>
         </div>
       </div>
     </div>
 
-    <!-- ⬛ Bottom Nav Bar (የታችኛው ማሰሻ) -->
-    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-darkFrame text-slate-400 z-50 px-4 py-2 flex items-center justify-between border-t border-slate-800 shadow-2xl">
+    <!-- ⬛ Bottom Nav Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-darkFrame text-slate-400 z-50 px-4 py-2 flex items-center justify-between border-t border-slate-800">
       <button id="navHome" class="flex flex-col items-center text-white gap-0.5 cursor-pointer">
         <span class="material-symbols-outlined text-xl">home</span>
         <span class="text-[10px] font-bold">መነሻ</span>
@@ -229,7 +230,6 @@
         <span class="text-[10px] font-medium">ፍለጋ</span>
       </button>
 
-      <!-- ➕ ፕላስ አዝራር (የማስታወቂያ መለጠፊያ ፎርም መክፈቻ) -->
       <button id="navAdd" class="-mt-6 w-12 h-12 rounded-full bg-brandOrange text-white flex items-center justify-center shadow-lg shadow-brandOrange/40 border-4 border-darkFrame active:scale-90 transition-transform cursor-pointer">
         <span class="material-symbols-outlined text-2xl font-black">add</span>
       </button>
@@ -247,7 +247,7 @@
 
   </div>
 
-  <!-- 📝 POST MODAL (የማስታወቂያ መለጠፊያ እና ሰነድ ማያያዣ ፎርም) -->
+  <!-- 📝 ADVANCED MULTI-STEP POSTING & DOCUMENT UPLOAD MODAL -->
   <div id="postModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4 hidden">
     <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl relative border border-slate-100 max-h-[90vh] overflow-y-auto no-scrollbar">
       <div class="flex items-center justify-between border-b pb-3 mb-3">
@@ -289,7 +289,7 @@
           </div>
         </div>
 
-        <!-- 📎 Document & Image Attachment -->
+        <!-- 📎 Document & Image Attachment Form Field -->
         <div>
           <label class="text-[11px] font-bold text-slate-600 block mb-1">የዕቃው ፎቶ ወይም ሰነድ (Document/Image File)</label>
           <input type="file" id="postFile" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-[10px] file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-semibold file:bg-brandBlue file:text-white hover:file:bg-brandBlue/90"/>
@@ -322,7 +322,7 @@
     </div>
   </div>
 
-  <!-- 💳 WALLET TOPUP MODAL -->
+  <!-- Wallet Topup Modal -->
   <div id="topupModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center px-4 hidden">
     <div class="bg-white rounded-3xl w-full max-w-sm p-5 shadow-2xl relative border border-slate-100 space-y-4">
       <div class="flex items-center justify-between border-b pb-3">
@@ -339,9 +339,10 @@
     </div>
   </div>
 
-  <!-- ⚙️ FULL JAVASCRIPT ENGINE -->
+  <!-- Full Engine JavaScript -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", () => {
+      // Views Switcher Elements
       const viewHome = document.getElementById("viewHome");
       const viewSearch = document.getElementById("viewSearch");
       const viewWallet = document.getElementById("viewWallet");
@@ -380,7 +381,7 @@
       function updateWalletUI() {
         if(headerWalletDisplay) headerWalletDisplay.innerText = userWallet.toFixed(2) + " Br";
         if(walletBalanceBig) walletBalanceBig.innerText = userWallet.toFixed(2) + " ብር";
-        localStorage.setItem("dessie_wallet", userWallet.toString());
+        localStorage.setItem("dessie_wallet", userWallet);
       }
       updateWalletUI();
 
@@ -394,7 +395,7 @@
           if (!amt || amt <= 0) { alert("እባክዎ ትክክለኛ መጠን ያስገቡ!"); return; }
           userWallet += amt;
           updateWalletUI();
-          alert("🎉 በስኬት " + amt + " ብር ወደ ዋሌትዎ ተጭኗል!");
+          alert(`🎉 በስኬት ${amt} ብር ወደ ዋሌትዎ ተጭኗል!`);
           topupInput.value = "";
           topupModal.classList.add("hidden");
         });
@@ -454,12 +455,12 @@
         });
       }
 
-      // Telegram Broadcast
+      // Telegram Broadcast & Multi-form Submission
       const BOT_TOKEN = "8839692572:AAECMsxjgvTpsQI_hshWLYs7EvQgRhqYGs";
       const CHANNEL_ID = "@DessieMarket";
 
       if (postForm) {
-        postForm.addEventListener("submit", function(e) {
+        postForm.addEventListener("submit", async (e) => {
           e.preventDefault();
           const title = document.getElementById("postTitle").value;
           const price = document.getElementById("postPrice").value;
@@ -475,19 +476,20 @@
           submitBtn.disabled = true;
           submitBtn.innerText = "ክፍያ በመረጋገጥ ላይ...";
 
-          const messageText = "🚨 *አዲስ ማስታወቂያ (ፕሪሚየም ፕላትፎርም)* 🚨\n\n📌 *ርዕስ:* " + title + "\n📂 *ምድብ:* " + category + "\n💰 *ዋጋ:* " + price + " ብር\n📍 *አድራሻ:* " + location + "\n📞 *ስልክ:* " + phone + "\n📎 *ሰነድ/ፎቶ:* " + hasFile + "\n💳 *የክፍያ ዘዴ:* " + paymentMethod.toUpperCase() + "\n🆔 *TxID:* " + txId + "\n\n✨ *በደሴ ማርት ፕሪሚየም መተግበሪያ የተለጠፈ*";
+          const messageText = `🚨 *አዲስ ማስታወቂያ (ፕሪሚየም ፕላትፎርም)* 🚨\n\n📌 *ርዕስ:* ${title}\n📂 *ምድብ:* ${category}\n💰 *ዋጋ:* ${price} ብር\n📍 *አድራሻ:* ${location}\n📞 *ስልክ:* ${phone}\n📎 *ሰነድ/ፎቶ:* ${hasFile}\n💳 *የክፍያ ዘዴ:* ${paymentMethod.toUpperCase()}\n🆔 *TxID:* ${txId}\n\n✨ *በደሴ ማርት ፕሪሚየም መተግበሪያ የተለጠፈ*`;
 
-          fetch("https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: CHANNEL_ID,
-              text: messageText,
-              parse_mode: 'Markdown'
-            })
-          })
-          .then(function(res) { return res.json(); })
-          .then(function(data) {
+          try {
+            const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: CHANNEL_ID,
+                text: messageText,
+                parse_mode: 'Markdown'
+              })
+            });
+
+            const data = await res.json();
             if (data.ok) {
               alert("🎉 ክፍያዎ ተረጋግጦ ማስታወቂያዎ ከሰነዱ ጋር ወደ ቴሌግራም ቻናል (@DessieMarket) ተልኳል!");
               postForm.reset();
@@ -495,26 +497,22 @@
             } else {
               alert("⚠️ ማስታወቂያውን መላክ አልተቻለም፦ " + data.description);
             }
-          })
-          .catch(function(err) {
+          } catch (err) {
             console.error(err);
             alert("❌ የኔትወርክ ስህተት አጋጥሟል!");
-          })
-          .finally(function() {
+          } finally {
             submitBtn.disabled = false;
             submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm">verified</span><span>ክፍያ አረጋግጦ ወደ ቴሌግራም ልጥፍ</span>`;
-          });
+          }
         });
       }
 
-      // Service Worker Registration
+      // Service Worker
       if ("serviceWorker" in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register("/sw.js").then((reg) => {
-            console.log("✅ ደሴ ማርት Service Worker ዝግጁ ነው:", reg.scope);
-          }).catch((err) => {
-            console.error("Service Worker ምዝገባ ስህተት:", err);
-          });
+        navigator.serviceWorker.register("/sw.js").then((reg) => {
+          console.log("✅ ደሴ ማርት ServiceWorker ተመዝግቧል:", reg.scope);
+        }).catch((err) => {
+          console.error("ServiceWorker ስህተት:", err);
         });
       }
     });
